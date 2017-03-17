@@ -6,8 +6,8 @@ import (
 	"github.com/philchia/brain"
 )
 
-// New returns a new Brain.
-func New(k int) brain.Classifier {
+// KNeighborsClassifier returns a new Brain.
+func KNeighborsClassifier(k int) brain.Classifier {
 	brain := &knn{
 		k: k,
 	}

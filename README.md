@@ -4,7 +4,7 @@
 
 ```go
 data, target := datasets.LoadIris()
-clf := knn.New(5)
+clf := knn.KNeighborsClassifier(5)
 clf.Fit(data, target)
 log.Println(clf.Predict([]float64{5.9, 3, 5.1, 1.8}))
 ```

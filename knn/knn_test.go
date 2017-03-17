@@ -26,7 +26,7 @@ func TestNew(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := New(tt.args.k); (got == nil) != tt.wantNil {
+			if got := KNeighborsClassifier(tt.args.k); (got == nil) != tt.wantNil {
 				t.Errorf("New(), want nil %v, got %v", tt.wantNil, got)
 			}
 		})
@@ -99,7 +99,7 @@ func Test_knn_Predict(t *testing.T) {
 
 func TestKnn(t *testing.T) {
 	data, target := datasets.LoadIris()
-	clf := New(5)
+	clf := KNeighborsClassifier(5)
 	clf.Fit(data, target)
 	log.Println(clf.Predict([]float64{5.9, 3, 5.1, 1.8}))
 }
