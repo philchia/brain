@@ -6,8 +6,8 @@ type Classifier interface {
 	Predict(x []float64) string
 }
 
-// Regress used for regress
-type Regress interface {
+// Regressor used for regress
+type Regressor interface {
 	Fit(x [][]float64, y []float64)
 	Predict(x []float64) float64
 }

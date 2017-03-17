@@ -62,3 +62,51 @@ func (c *knn) Predict(x []float64) string {
 	}
 	return majority
 }
+
+// KNeighborsRegressor returns a new Brain.
+func KNeighborsRegressor(k int) brain.Regressor {
+	brain := &knnRegressor{
+		k: k,
+	}
+	return brain
+}
+
+type knnRegressor struct {
+	k      int
+	data   [][]float64
+	target []float64
+}
+
+type distanceRegressor struct {
+	dis    float64
+	target float64
+}
+
+func (r *knnRegressor) Fit(x [][]float64, y []float64) {
+	r.data = x
+	r.target = y
+}
+
+func (r *knnRegressor) Predict(x []float64) float64 {
+	var distances []distanceRegressor
+	for j := range r.data {
+		dis := distanceRegressor{
+			target: r.target[j],
+		}
+		for i := range x {
+			dis.dis += (r.data[j][i] - x[i]) * (r.data[j][i] - x[i])
+		}
+		distances = append(distances, dis)
+	}
+
+	sort.Slice(distances, func(i, j int) bool {
+		return distances[i].dis < distances[j].dis
+	})
+
+	var sum float64
+
+	for i := 0; i < r.k; i++ {
+		sum += distances[i].target
+	}
+	return sum / float64(r.k)
+}
