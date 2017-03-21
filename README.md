@@ -2,7 +2,7 @@
 
 ## Warning
 
-brain is a personal experimental project that under heavy development, backwark api compatibility is not guaranteed!
+brain is a personal experimental project that under heavy development, backward api compatibility is not guaranteed!
 
 ## Examples
 
