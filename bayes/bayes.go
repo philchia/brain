@@ -99,14 +99,6 @@ func (b *bayes) Measure(x [][]float64, y []string) float64 {
 	return float64(res) / float64(total)
 }
 
-func onesI(l int) []int {
-	ret := make([]int, l)
-	for i := range ret {
-		ret[i] = 1
-	}
-	return ret
-}
-
 func onesF(l int) []float64 {
 	ret := make([]float64, l)
 	for i := range ret {
@@ -122,14 +114,6 @@ func sumVF(v []float64, s []float64) {
 	}
 }
 
-func sumI(v []int) int {
-	ret := 0
-	for _, n := range v {
-		ret += n
-	}
-	return ret
-}
-
 func sumF(v []float64) float64 {
 	ret := 0.0
 	for _, n := range v {
@@ -138,27 +122,9 @@ func sumF(v []float64) float64 {
 	return ret
 }
 
-func multipleN(v []int, s int) {
-	for i, n := range v {
-		v[i] = n * s
-	}
-}
-
 func multipleF(v []float64, s float64) {
 	for i, n := range v {
 		v[i] = n * s
-	}
-}
-
-func multipleVN(v []int, s []int) {
-	for i, n := range v {
-		v[i] = n * s[i]
-	}
-}
-
-func multipleVF(v []float64, s []float64) {
-	for i, n := range v {
-		v[i] = n * s[i]
 	}
 }
 
@@ -172,14 +138,4 @@ func multipleVFS(v []float64, s []float64) []float64 {
 
 func logF(x float64) float64 {
 	return math.Log(x)
-}
-
-func exp(x float64) float64 {
-	return math.Exp(x)
-}
-
-func logV(v []float64) {
-	for i, n := range v {
-		v[i] = logF(n)
-	}
 }
