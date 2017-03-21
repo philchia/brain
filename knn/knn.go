@@ -8,13 +8,13 @@ import (
 
 // KNeighborsClassifier returns a new Brain.
 func KNeighborsClassifier(k int) brain.Classifier {
-	brain := &knn{
+	brain := &knnClassifier{
 		k: k,
 	}
 	return brain
 }
 
-type knn struct {
+type knnClassifier struct {
 	k      int
 	data   [][]float64
 	target []string
@@ -25,12 +25,12 @@ type distance struct {
 	target string
 }
 
-func (c *knn) Fit(x [][]float64, y []string) {
+func (c *knnClassifier) Fit(x [][]float64, y []string) {
 	c.data = x
 	c.target = y
 }
 
-func (c *knn) Predict(x []float64) string {
+func (c *knnClassifier) Predict(x []float64) string {
 	var distances []distance
 	for j := range c.data {
 		dis := distance{
@@ -61,6 +61,17 @@ func (c *knn) Predict(x []float64) string {
 		}
 	}
 	return majority
+}
+
+func (c *knnClassifier) Measure(x [][]float64, y []string) float64 {
+	total := len(y)
+	res := 0
+	for i, target := range y {
+		if target == c.Predict(x[i]) {
+			res++
+		}
+	}
+	return float64(res) / float64(total)
 }
 
 // KNeighborsRegressor returns a new Brain.

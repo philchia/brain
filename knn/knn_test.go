@@ -56,7 +56,7 @@ func Test_knn_Fit(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			c := &knn{
+			c := &knnClassifier{
 				k:      tt.fields.k,
 				data:   tt.fields.data,
 				target: tt.fields.target,
@@ -85,7 +85,7 @@ func Test_knn_Predict(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			c := &knn{
+			c := &knnClassifier{
 				k:      tt.fields.k,
 				data:   tt.fields.data,
 				target: tt.fields.target,
@@ -101,5 +101,8 @@ func TestKnn(t *testing.T) {
 	data, target := datasets.LoadIris()
 	clf := KNeighborsClassifier(5)
 	clf.Fit(data, target)
-	log.Println(clf.Predict([]float64{5.9, 3, 5.1, 1.8}))
+	log.Println(clf.Predict(data[2]))
+	log.Println(target[2])
+
+	log.Printf("accurate %f", clf.Measure(data, target))
 }
